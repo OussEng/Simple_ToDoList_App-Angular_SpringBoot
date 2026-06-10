@@ -40,13 +40,13 @@ REST API for the task management frontend. Built with Spring Boot 3, Spring Data
 
 ## API Endpoints
 
-| Method | URL | Body | Response |
-|--------|-----|------|----------|
-| GET | `/api/v1/tasks/all` | — | `ApiResponse<Task[]>` |
-| GET | `/api/v1/task/{id}` | — | `ApiResponse<Task>` |
-| POST | `/api/v1/task/create` | `CreateTaskDto` | `Task` |
-| PUT | `/api/v1/task/update/{id}` | `UpdateTaskDto` | `ApiResponse<Task>` |
-| DELETE | `/api/v1/task/delete/{id}` | — | `ApiResponse<null>` |
+| Method | URL | Response |
+|--------|-----|---------|
+| GET | `/api/v1/tasks/all` | `ApiResponse<Task[]>` |
+| GET | `/api/v1/task/{id}` |  `ApiResponse<Task>` |
+| POST | `/api/v1/task/create` |  `Task` |
+| PUT | `/api/v1/task/update/{id}`  | `ApiResponse<Task>` |
+| DELETE | `/api/v1/task/delete/{id}`| `ApiResponse<null>` |
 
 ### ApiResponse envelope
 ```json
