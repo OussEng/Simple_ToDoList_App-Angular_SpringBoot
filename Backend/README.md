@@ -1,4 +1,4 @@
-# Task Back Spring Boot REST API
+# Task Spring Boot REST API
 
 REST API for the task management frontend. Built with Spring Boot 3, Spring Data JPA, and PostgreSQL.
 
