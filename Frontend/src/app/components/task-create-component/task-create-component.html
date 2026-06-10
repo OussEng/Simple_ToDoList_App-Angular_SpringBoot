@@ -1,0 +1,19 @@
+<div>
+<form class="bg-white text-gray-500 max-w-[340px] mx-4 p-6 text-left text-sm rounded-lg" [formGroup]="taskForm" (ngSubmit)="submitForm()">
+
+  <div class="form-group">
+    <label class="font-medium" for="name">Title</label>
+    <input class="w-full border mt-1.5 mb-4 border-gray-500/30 outline-none rounded py-2.5 px-3" type="text" id="title" formControlName="title">
+    @if (taskForm.get('title')?.invalid && taskForm.get('description')?.touched){
+        <span>Title is required</span>
+    }
+    <label class="font-medium" for="description">Description</label>
+    <textarea class="w-full border mt-1.5 mb-4 border-gray-500/30 outline-none rounded py-2.5 px-3" type="text" id="description" formControlName="description"></textarea>
+    @if (taskForm.get('description')?.invalid && taskForm.get('description')?.touched){
+      <span>Title is required</span>
+    }
+  </div>
+
+  <button class="px-6 py-2 active:scale-95 transition bg-blue-500 rounded text-white shadow-lg shadow-blue-500/30 text-sm font-medium" type="submit" [disabled]="taskForm.invalid">Submit</button>
+</form>
+</div>

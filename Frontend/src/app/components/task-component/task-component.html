@@ -1,0 +1,56 @@
+
+<div class="flex justify-center">
+<div class="relative overflow-x-auto bg-white shadow-sm rounded-md border border-gray-200 w-9/12">
+  <table class="w-full text-sm text-left text-gray-600">
+    <thead class="text-sm text-gray-600 bg-gray-50 border-b border-gray-200">
+    <tr>
+      <th scope="col" class="px-6 py-3 font-medium">Task</th>
+      <th scope="col" class="px-6 py-3 font-medium">Title</th>
+      <th scope="col" class="px-6 py-3 font-medium">Description</th>
+      <th scope="col" class="px-6 py-3 font-medium">Done</th>
+      <th scope="col" class="px-6 py-3 font-medium">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+
+      @if (isLoading()) {
+        <tr>
+          <td colspan="4" class="px-6 py-4">
+            <div class="animate-pulse h-4 bg-gray-200 rounded w-full"></div>
+          </td>
+        </tr>
+      }
+      @if (tasks().length === 0 && !isLoading()) {
+        <tr>
+          <td colspan="5" class="px-6 py-4 text-center text-gray-400">
+            No tasks found
+          </td>
+        </tr>
+      }
+
+      @for (task of tasks(); track task.id) {
+        <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            {{ task.id }}
+          </th>
+          <td class="px-6 py-4">{{ task.title }}</td>
+          <td class="px-6 py-4">{{ task.description }}</td>
+          <td class="px-6 py-4">{{ task.done ? 'Yes' : 'No' }}</td>
+          <td class="px-6 py-4 flex gap-2">
+            <button type="button" class="px-6 py-2 active:scale-95 transition bg-blue-500 rounded text-white shadow-lg shadow-blue-500/30 text-sm font-medium" (click)="openEdit(task)">Edit</button>
+            <button type="button" class="px-6 py-2 active:scale-95 transition bg-red-500 rounded text-white shadow-lg shadow-blue-500/30 text-sm font-medium" (click)="openDelete(task)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+  <div>
+    <button type="button" class="px-6 py-2 active:scale-95 transition bg-blue-500 rounded text-white shadow-lg shadow-blue-500/30 text-sm font-medium" (click)="openForm()" >add</button>
+  </div>
+</div>
+<div>
+
+</div>
+
