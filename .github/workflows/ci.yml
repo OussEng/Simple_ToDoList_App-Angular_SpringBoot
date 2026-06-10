@@ -21,10 +21,10 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: mvn -B test
+        run: mvn -B test --file backend/pom.xml
 
       - name: Package
-        run: mvn -B package -DskipTests
+        run: mvn -B package -DskipTests --file backend/pom.xml
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
