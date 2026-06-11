@@ -1,10 +1,10 @@
 package com.tasks.taskback;
 
 import com.tasks.taskback.exception.TaskNotFoundException;
+import com.tasks.taskback.task.dao.ITaskDao;
 import com.tasks.taskback.task.entity.Task;
 import com.tasks.taskback.task.dto.create.CreateTaskDto;
 import com.tasks.taskback.task.dto.update.UpdateTaskDto;
-import com.tasks.taskback.task.repository.TaskRepository;
 import com.tasks.taskback.task.service.TaskService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 class TaskServiceTest {
 
     @Mock
-    private TaskRepository repository;
+    private ITaskDao repository;
 
     @InjectMocks
     private TaskService service;
@@ -48,7 +48,7 @@ class TaskServiceTest {
         List<Task> result = service.getAll();
 
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getTitle()).isEqualTo("gg");
+        assertThat(result.getFirst().getTitle()).isEqualTo("gg");
     }
 
     @Test
@@ -57,6 +57,7 @@ class TaskServiceTest {
 
         Task result = service.getById(1L);
 
+        assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(1L);
     }
 
@@ -68,6 +69,7 @@ class TaskServiceTest {
                 .isInstanceOf(TaskNotFoundException.class)
                 .hasMessageContaining("99");
     }
+
 
     @Test
     void create_saves_Task_And_Returns_It() {
@@ -102,10 +104,10 @@ class TaskServiceTest {
     @Test
     void delete_Task() {
         when(repository.existsById(1L)).thenReturn(true);
-        doNothing().when(repository).deleteById(1L);
 
-        assertThatCode(() -> service.delete(1L)).doesNotThrowAnyException();
-        verify(repository).deleteById(1L);
+        service.delete(1L);
+
+        verify(repository).delete(1L);
     }
 
     @Test

@@ -1,10 +1,11 @@
 package com.tasks.taskback.task.service;
 
+
 import com.tasks.taskback.exception.TaskNotFoundException;
+import com.tasks.taskback.task.dao.ITaskDao;
 import com.tasks.taskback.task.entity.Task;
 import com.tasks.taskback.task.dto.create.CreateTaskDto;
 import com.tasks.taskback.task.dto.update.UpdateTaskDto;
-import com.tasks.taskback.task.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +13,9 @@ import java.util.List;
 @Service
 public class TaskService {
 
-    private final TaskRepository repository;
+    private final ITaskDao repository;
 
-    public TaskService(TaskRepository repository) {
+    public TaskService(ITaskDao repository) {
         this.repository = repository;
     }
 
@@ -23,8 +24,7 @@ public class TaskService {
     }
 
     public Task getById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new TaskNotFoundException(id));
+        return repository.findById(id).orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     public Task create(CreateTaskDto dto) {
@@ -52,6 +52,6 @@ public class TaskService {
         if (!repository.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
-        repository.deleteById(id);
+        repository.delete(id);
     }
 }
